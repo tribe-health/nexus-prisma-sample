@@ -1,0 +1,28 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+generator nexusPrisma {
+  provider = "nexus-prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+/// This is a user!
+model User {
+  /// This is an id!
+  id   String @id
+  name String
+  post Post[]
+}
+
+model Post {
+  id      String  @id
+  title   String
+  content String
+  User    User?   @relation(fields: [id_user], references: [id])
+  id_user String?
+}
